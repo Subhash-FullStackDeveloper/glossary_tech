@@ -28,7 +28,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pt-20">
       <AnimatePresence>
         {isLoading ? (
           <motion.div
@@ -46,7 +46,7 @@ const Home = () => {
             exit={{ opacity: 0 }}
           >
             {/* Hero Section */}
-            <section className="relative min-h-[85vh] bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white overflow-hidden">
+            <section className="relative min-h-[80vh] bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white overflow-hidden">
               <div className="absolute inset-0 bg-black opacity-50"></div>
               {/* Animated background shapes */}
               <div className="absolute inset-0 overflow-hidden">
@@ -74,21 +74,21 @@ const Home = () => {
                 ))}
               </div>
               <div className="container mx-auto px-4 h-full flex items-center relative z-10">
-                <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="grid md:grid-cols-2 gap-12 items-center py-12 md:py-0">
                   <motion.div
                     initial="initial"
                     animate="animate"
                     variants={fadeInUp}
                     className="max-w-3xl"
                   >
-                    <h1 className="text-5xl md:text-6xl font-bold mb-6 font-poppins leading-tight">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-poppins leading-tight">
                       Transforming Ideas into
                       <span className="text-blue-400"> Digital Reality</span>
                     </h1>
-                    <p className="text-xl mb-8 text-gray-200 font-inter">
+                    <p className="text-lg md:text-xl mb-8 text-gray-200 font-inter">
                       We specialize in creating innovative software solutions that drive business growth and success. Our expert team delivers cutting-edge technology solutions tailored to your needs.
                     </p>
-                    <div className="flex gap-4">
+                    <div className="flex flex-wrap gap-4">
                       <Link to="/contact" className="btn-primary inline-flex items-center group">
                         Get Started
                         <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
@@ -111,9 +111,9 @@ const Home = () => {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.4 + index * 0.1 }}
-                          className="bg-white/10 backdrop-blur-lg rounded-lg p-6 text-center"
+                          className="bg-white/10 backdrop-blur-lg rounded-lg p-6 text-center transform hover:scale-105 transition-transform duration-300"
                         >
-                          <h3 className="text-4xl font-bold text-blue-400 mb-2">{stat.number}</h3>
+                          <h3 className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">{stat.number}</h3>
                           <p className="text-gray-200">{stat.label}</p>
                         </motion.div>
                       ))}
@@ -124,7 +124,7 @@ const Home = () => {
               
               {/* Wave shape divider */}
               <div className="absolute bottom-0 left-0 right-0">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full h-auto">
                   <path fill="#f9fafb" fillOpacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
                 </svg>
               </div>

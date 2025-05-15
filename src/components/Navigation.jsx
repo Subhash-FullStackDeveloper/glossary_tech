@@ -10,10 +10,6 @@ const Navigation = () => {
 
   const menuItems = [
     {
-      title: 'Home',
-      path: '/'
-    },
-    {
       title: 'About',
       path: '/about'
     },
@@ -48,6 +44,17 @@ const Navigation = () => {
     setActiveDropdown(null);
   }, [location]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
     setActiveDropdown(null);
@@ -66,26 +73,26 @@ const Navigation = () => {
             <img
               src="/logo.svg"
               alt="Glossary Softtech"
-              className="h-12"
+              className="h-10 md:h-12"
             />
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {menuItems.map((item, index) => (
               <div key={index} className="relative group">
                 {item.submenu ? (
                   <button
-                    className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 font-medium"
+                    className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
                     onClick={() => toggleDropdown(index)}
                   >
                     <span>{item.title}</span>
-                    <FaChevronDown className="h-4 w-4" />
+                    <FaChevronDown className={`h-4 w-4 transform transition-transform duration-200 ${activeDropdown === index ? 'rotate-180' : ''}`} />
                   </button>
                 ) : (
                   <Link
                     to={item.path}
-                    className={`text-gray-700 hover:text-blue-600 font-medium ${
+                    className={`text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 ${
                       location.pathname === item.path ? 'text-blue-600' : ''
                     }`}
                   >
@@ -101,13 +108,13 @@ const Navigation = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2"
+                        className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 border border-gray-100"
                       >
                         {item.submenu.map((subItem, subIndex) => (
                           <Link
                             key={subIndex}
                             to={subItem.path}
-                            className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                            className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
                           >
                             {subItem.title}
                           </Link>
@@ -122,8 +129,9 @@ const Navigation = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-700 hover:text-blue-600"
+            className="md:hidden text-gray-700 hover:text-blue-600 p-2"
             onClick={toggleMenu}
+            aria-label="Toggle menu"
           >
             {isOpen ? (
               <FaTimes className="h-6 w-6" />
@@ -140,20 +148,20 @@ const Navigation = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden"
+              className="md:hidden overflow-hidden"
             >
-              <div className="py-4">
+              <div className="py-2 space-y-1">
                 {menuItems.map((item, index) => (
                   <div key={index}>
                     {item.submenu ? (
                       <div>
                         <button
-                          className="flex items-center justify-between w-full px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                          className="flex items-center justify-between w-full px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
                           onClick={() => toggleDropdown(index)}
                         >
                           <span>{item.title}</span>
                           <FaChevronDown
-                            className={`h-4 w-4 transform transition-transform ${
+                            className={`h-4 w-4 transform transition-transform duration-200 ${
                               activeDropdown === index ? 'rotate-180' : ''
                             }`}
                           />
@@ -170,7 +178,7 @@ const Navigation = () => {
                                 <Link
                                   key={subIndex}
                                   to={subItem.path}
-                                  className="block px-8 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                                  className="block px-8 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
                                 >
                                   {subItem.title}
                                 </Link>
@@ -182,8 +190,8 @@ const Navigation = () => {
                     ) : (
                       <Link
                         to={item.path}
-                        className={`block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 ${
-                          location.pathname === item.path ? 'text-blue-600' : ''
+                        className={`block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 ${
+                          location.pathname === item.path ? 'text-blue-600 bg-blue-50' : ''
                         }`}
                       >
                         {item.title}
