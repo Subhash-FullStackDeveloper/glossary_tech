@@ -32,7 +32,7 @@ const Home = () => {
     },
     {
       title: 'Staffing & Solutions',
-      description: 'Recruitment Process Outsourcing (RPO) is when a service provider acts as a company's internal recruitment function for a portion or all of its jobs.',
+      description: "Recruitment Process Outsourcing (RPO) is when a service provider acts as a company's internal recruitment function for a portion or all of its jobs.",
       link: '/services/staffing'
     }
   ];
