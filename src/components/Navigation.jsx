@@ -1,203 +1,201 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const location = useLocation();
 
   const menuItems = [
     {
-      title: 'About Us',
-      submenu: [
-        { title: 'About Us', path: '/about' },
-        { title: 'Mission, Vision & Values', path: '/mission-vision' }
-      ]
+      title: 'Home',
+      path: '/'
+    },
+    {
+      title: 'About',
+      path: '/about'
     },
     {
       title: 'Services',
+      path: '/services',
       submenu: [
-        {
-          title: 'BPO Services',
-          submenu: [
-            { title: 'BPO/Tech support', path: '/services/bpo-tech-support' },
-            { title: 'Telecom', path: '/services/telecom' },
-            { title: 'E-publications', path: '/services/e-publications' },
-            { title: 'Telemarketing', path: '/services/telemarketing' }
-          ]
-        },
-        {
-          title: 'IT/Software',
-          submenu: [
-            { title: 'Software Development', path: '/services/software-development' },
-            { title: 'Software Testing', path: '/services/software-testing' },
-            { title: 'Mobile Applications', path: '/services/mobile-applications' },
-            { title: 'Cloud Computing', path: '/services/cloud-computing' }
-          ]
-        },
-        { title: 'Staffing & Solutions', path: '/services/staffing' },
+        { title: 'BPO Services', path: '/services/bpo' },
+        { title: 'Software Development', path: '/services/software' },
         { title: 'Training & Placements', path: '/services/training' },
-        { title: 'Internships', path: '/services/internships' }
+        { title: 'Software Testing', path: '/services/testing' },
+        { title: 'Internships', path: '/services/internships' },
+        { title: 'Staffing & Solutions', path: '/services/staffing' }
       ]
     },
-    { title: 'Clients', path: '/clients' },
     {
-      title: 'Insights',
-      submenu: [
-        { title: 'Events', path: '/insights/events' },
-        { title: 'Gallery', path: '/insights/gallery' },
-        { title: "FAQ's", path: '/insights/faqs' }
-      ]
+      title: 'Clients',
+      path: '/clients'
     },
     {
       title: 'Careers',
-      submenu: [
-        { title: 'Job Openings', path: '/careers/jobs' },
-        { title: 'Registration', path: '/careers/register' }
-      ]
+      path: '/careers'
     },
-    { title: 'Contact', path: '/contact' }
+    {
+      title: 'Contact',
+      path: '/contact'
+    }
   ];
 
+  useEffect(() => {
+    setIsOpen(false);
+    setActiveDropdown(null);
+  }, [location]);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+    setActiveDropdown(null);
+  };
+
+  const toggleDropdown = (index) => {
+    setActiveDropdown(activeDropdown === index ? null : index);
+  };
+
   return (
-    <nav className="bg-white shadow-lg fixed w-full z-50">
+    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src="/logo.png" alt="Glossary Softtech" className="h-12" />
+            <img
+              src="/logo.svg"
+              alt="Glossary Softtech"
+              className="h-12"
+            />
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-8">
             {menuItems.map((item, index) => (
               <div key={index} className="relative group">
-                {item.path ? (
+                {item.submenu ? (
+                  <button
+                    className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 font-medium"
+                    onClick={() => toggleDropdown(index)}
+                  >
+                    <span>{item.title}</span>
+                    <FaChevronDown className="h-4 w-4" />
+                  </button>
+                ) : (
                   <Link
                     to={item.path}
-                    className="text-gray-700 hover:text-blue-600 py-2"
+                    className={`text-gray-700 hover:text-blue-600 font-medium ${
+                      location.pathname === item.path ? 'text-blue-600' : ''
+                    }`}
                   >
                     {item.title}
                   </Link>
-                ) : (
-                  <div className="text-gray-700 hover:text-blue-600 py-2 cursor-pointer">
-                    {item.title}
-                  </div>
                 )}
 
+                {/* Dropdown Menu */}
                 {item.submenu && (
-                  <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                    {item.submenu.map((subItem, subIndex) => (
-                      <div key={subIndex}>
-                        {subItem.path ? (
+                  <AnimatePresence>
+                    {activeDropdown === index && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2"
+                      >
+                        {item.submenu.map((subItem, subIndex) => (
                           <Link
+                            key={subIndex}
                             to={subItem.path}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
+                            className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                           >
                             {subItem.title}
                           </Link>
-                        ) : (
-                          <div className="relative group/sub">
-                            <div className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50">
-                              {subItem.title}
-                            </div>
-                            {subItem.submenu && (
-                              <div className="absolute left-full top-0 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-300">
-                                {subItem.submenu.map((subSubItem, subSubIndex) => (
-                                  <Link
-                                    key={subSubIndex}
-                                    to={subSubItem.path}
-                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
-                                  >
-                                    {subSubItem.title}
-                                  </Link>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 )}
               </div>
             ))}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-gray-700 hover:text-blue-600"
+            onClick={toggleMenu}
           >
-            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            {isOpen ? (
+              <FaTimes className="h-6 w-6" />
+            ) : (
+              <FaBars className="h-6 w-6" />
+            )}
           </button>
         </div>
-      </div>
 
-      {/* Mobile Navigation */}
-      <motion.div
-        initial={{ opacity: 0, height: 0 }}
-        animate={{ opacity: isOpen ? 1 : 0, height: isOpen ? 'auto' : 0 }}
-        transition={{ duration: 0.3 }}
-        className="md:hidden bg-white"
-      >
-        <div className="px-4 py-2">
-          {menuItems.map((item, index) => (
-            <div key={index} className="py-2">
-              {item.path ? (
-                <Link
-                  to={item.path}
-                  className="block text-gray-700 hover:text-blue-600"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.title}
-                </Link>
-              ) : (
-                <>
-                  <div className="text-gray-700 font-medium">{item.title}</div>
-                  {item.submenu && (
-                    <div className="pl-4 mt-2">
-                      {item.submenu.map((subItem, subIndex) => (
-                        <div key={subIndex} className="py-1">
-                          {subItem.path ? (
-                            <Link
-                              to={subItem.path}
-                              className="block text-gray-600 hover:text-blue-600"
-                              onClick={() => setIsOpen(false)}
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden"
+            >
+              <div className="py-4">
+                {menuItems.map((item, index) => (
+                  <div key={index}>
+                    {item.submenu ? (
+                      <div>
+                        <button
+                          className="flex items-center justify-between w-full px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                          onClick={() => toggleDropdown(index)}
+                        >
+                          <span>{item.title}</span>
+                          <FaChevronDown
+                            className={`h-4 w-4 transform transition-transform ${
+                              activeDropdown === index ? 'rotate-180' : ''
+                            }`}
+                          />
+                        </button>
+                        <AnimatePresence>
+                          {activeDropdown === index && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              className="bg-gray-50"
                             >
-                              {subItem.title}
-                            </Link>
-                          ) : (
-                            <>
-                              <div className="text-gray-600 font-medium">
-                                {subItem.title}
-                              </div>
-                              {subItem.submenu && (
-                                <div className="pl-4 mt-1">
-                                  {subItem.submenu.map((subSubItem, subSubIndex) => (
-                                    <Link
-                                      key={subSubIndex}
-                                      to={subSubItem.path}
-                                      className="block py-1 text-gray-600 hover:text-blue-600"
-                                      onClick={() => setIsOpen(false)}
-                                    >
-                                      {subSubItem.title}
-                                    </Link>
-                                  ))}
-                                </div>
-                              )}
-                            </>
+                              {item.submenu.map((subItem, subIndex) => (
+                                <Link
+                                  key={subIndex}
+                                  to={subItem.path}
+                                  className="block px-8 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                                >
+                                  {subItem.title}
+                                </Link>
+                              ))}
+                            </motion.div>
                           )}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </>
-              )}
-            </div>
-          ))}
-        </div>
-      </motion.div>
+                        </AnimatePresence>
+                      </div>
+                    ) : (
+                      <Link
+                        to={item.path}
+                        className={`block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 ${
+                          location.pathname === item.path ? 'text-blue-600' : ''
+                        }`}
+                      >
+                        {item.title}
+                      </Link>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </nav>
   );
 };

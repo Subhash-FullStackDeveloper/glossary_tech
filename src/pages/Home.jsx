@@ -1,183 +1,147 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { FaArrowRight } from 'react-icons/fa';
+import { FaRocket, FaChartLine, FaUsers, FaLightbulb, FaCog, FaCode } from 'react-icons/fa';
 
 const Home = () => {
-  const services = [
-    {
-      title: 'BPO Services',
-      description: 'Glossary Soft Tech empowers organizations with cost-efficient, innovative, and cutting-edge business solutions.',
-      link: '/services/bpo'
-    },
-    {
-      title: 'Software Development',
-      description: 'We are committed to building effective, timely systems and delivering solutions that create clear and unparalleled business value for our clients.',
-      link: '/services/software-development'
-    },
-    {
-      title: 'Training & Placements',
-      description: 'Glossary Soft Tech has been actively involved in Job Placement Assistance as a value-added service in the IT/ITES Training Program.',
-      link: '/services/training'
-    },
-    {
-      title: 'Software Testing',
-      description: 'Glossary offer a comprehensive portfolio of testing services that take a proven approach to industrialized and structured software testing.',
-      link: '/services/testing'
-    },
-    {
-      title: 'Internships',
-      description: 'Glossary provide real world experience to those looking to explore or gain the relevant knowledge and skills required to enter into a particular career field.',
-      link: '/services/internships'
-    },
-    {
-      title: 'Staffing & Solutions',
-      description: "Recruitment Process Outsourcing (RPO) is when a service provider acts as a company's internal recruitment function for a portion or all of its jobs.",
-      link: '/services/staffing'
-    }
-  ];
-
-  const testimonials = [
-    {
-      text: "Anytime we reach out to Glossary Soft Tech Pvt.Ltd, they are there for our outsourced HR needs. They started by meeting with us and asking us about what we were looking for and took the time to understand our processes and the culture of our company. We really like their style and type of communication and most importantly the HR expertise they bring to our company.",
-      author: "Amruth kathekar",
-      position: "Deputy HR Manager (Polaris Gamma Process Hub India)"
-    }
-  ];
-
   return (
-    <div className="pt-20">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
-        <div className="container mx-auto px-4">
+      <section className="relative h-[600px] bg-gradient-to-r from-blue-900 to-indigo-900 text-white">
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="container mx-auto px-4 h-full flex items-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-4xl mx-auto"
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Glossary Softtech
+            <h1 className="text-5xl font-bold mb-6">
+              Transforming Ideas into Digital Reality
             </h1>
-            <p className="text-xl mb-8">
-              Growing as the reliable partner to the clients and delivering them the results beyond their expectations.
+            <p className="text-xl mb-8 text-gray-200">
+              We specialize in creating innovative software solutions that drive business growth and success
             </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition duration-300"
-            >
+            <button className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition duration-300">
               Get Started
-              <FaArrowRight className="ml-2" />
-            </Link>
+            </button>
           </motion.div>
         </div>
       </section>
 
-      {/* Welcome Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">Welcome to Glossary Soft Tech</h2>
-            <p className="text-gray-600 mb-8">
-              Glossary Soft Tech helps you to manage the ever changing talent needs in today's world of work in which rapid access to the right talent is a powerful competitive advantage. With our thorough understanding of staffing trends and our deep pool of highly qualified Candidates, Glossary Soft Tech can deliver the talent, matching the right individual to the right job—faster and with better business results.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission Vision Values Section */}
-      <section className="bg-gray-50 py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <h3 className="text-2xl font-bold mb-4">Mission</h3>
-              <p className="text-gray-600 mb-4">
-                Glossary Soft Tech Develop and provide Intelligent, Interactive and Scalable software and Security Systems products applying advance technologies to our valued customers along with complete technical support.
-              </p>
-              <Link to="/mission-vision" className="text-blue-600 hover:text-blue-700 font-semibold inline-flex items-center">
-                Learn More <FaArrowRight className="ml-2" />
-              </Link>
-            </div>
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <h3 className="text-2xl font-bold mb-4">Vision</h3>
-              <p className="text-gray-600 mb-4">
-                Glossary Soft Tech advances customer success by delivering unique best value solutions, consulting services and technologies that meet our clients' mission-critical needs anytime and anywhere.
-              </p>
-              <Link to="/mission-vision" className="text-blue-600 hover:text-blue-700 font-semibold inline-flex items-center">
-                Learn More <FaArrowRight className="ml-2" />
-              </Link>
-            </div>
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <h3 className="text-2xl font-bold mb-4">Values</h3>
-              <p className="text-gray-600 mb-4">
-                Glossary Soft Tech We believe that our success is built on the success of our clients, and we do what it takes to give our clients a sustained competitive edge through value and innovation.
-              </p>
-              <Link to="/mission-vision" className="text-blue-600 hover:text-blue-700 font-semibold inline-flex items-center">
-                Learn More <FaArrowRight className="ml-2" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Services Section */}
-      <section className="py-20">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Services</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white p-6 rounded-lg shadow-lg"
-              >
-                <h3 className="text-xl font-bold mb-4">{service.title}</h3>
-                <p className="text-gray-600 mb-4">{service.description}</p>
-                <Link
-                  to={service.link}
-                  className="text-blue-600 hover:text-blue-700 font-semibold inline-flex items-center"
-                >
-                  Learn More <FaArrowRight className="ml-2" />
-                </Link>
-              </motion.div>
-            ))}
+          <h2 className="text-3xl font-bold text-center mb-4">Our Services</h2>
+          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+            We offer comprehensive software solutions tailored to meet your business needs
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <ServiceCard
+              icon={<FaCode className="text-4xl text-blue-600" />}
+              title="Custom Software Development"
+              description="Tailored solutions to meet your unique business requirements"
+            />
+            <ServiceCard
+              icon={<FaCog className="text-4xl text-blue-600" />}
+              title="Web Application Development"
+              description="Modern and responsive web applications built with cutting-edge technologies"
+            />
+            <ServiceCard
+              icon={<FaLightbulb className="text-4xl text-blue-600" />}
+              title="Digital Transformation"
+              description="Transform your business processes with innovative digital solutions"
+            />
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="bg-gray-50 py-20">
+      {/* Why Choose Us Section */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Testimonials</h2>
-          <div className="max-w-4xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="bg-white p-8 rounded-lg shadow-lg text-center"
-              >
-                <p className="text-gray-600 italic mb-6">"{testimonial.text}"</p>
-                <h4 className="font-bold text-lg">{testimonial.author}</h4>
-                <p className="text-gray-500">{testimonial.position}</p>
-              </motion.div>
-            ))}
+          <h2 className="text-3xl font-bold text-center mb-4">Why Choose Us</h2>
+          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+            We deliver excellence through our core values and commitment to quality
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <FeatureCard
+              icon={<FaRocket className="text-4xl text-blue-600" />}
+              title="Innovation"
+              description="Stay ahead with cutting-edge solutions and technologies"
+            />
+            <FeatureCard
+              icon={<FaChartLine className="text-4xl text-blue-600" />}
+              title="Proven Results"
+              description="Track record of successful project deliveries"
+            />
+            <FeatureCard
+              icon={<FaUsers className="text-4xl text-blue-600" />}
+              title="Expert Team"
+              description="Skilled professionals dedicated to your success"
+            />
           </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-blue-900 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Business?</h2>
+          <p className="text-xl mb-8 text-gray-300">
+            Let's discuss how we can help you achieve your goals
+          </p>
+          <button className="bg-white text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300">
+            Contact Us Today
+          </button>
         </div>
       </section>
 
       {/* Clients Section */}
-      <section className="py-20">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Clients</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
-            {/* Add client logos here */}
+          <h2 className="text-3xl font-bold text-center mb-4">Our Clients</h2>
+          <p className="text-gray-600 text-center mb-12">
+            Trusted by leading companies worldwide
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
+            {[1, 2, 3, 4].map((index) => (
+              <div key={index} className="flex justify-center">
+                <div className="w-32 h-32 bg-gray-200 rounded-lg flex items-center justify-center">
+                  <span className="text-gray-500">Client Logo</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
     </div>
+  );
+};
+
+// Feature Card Component
+const FeatureCard = ({ icon, title, description }) => {
+  return (
+    <motion.div
+      whileHover={{ y: -5 }}
+      className="p-6 bg-white rounded-lg shadow-lg text-center"
+    >
+      <div className="flex justify-center mb-4">{icon}</div>
+      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <p className="text-gray-600">{description}</p>
+    </motion.div>
+  );
+};
+
+// Service Card Component
+const ServiceCard = ({ icon, title, description }) => {
+  return (
+    <motion.div
+      whileHover={{ y: -5 }}
+      className="p-6 bg-white rounded-lg shadow-lg text-center"
+    >
+      <div className="flex justify-center mb-4">{icon}</div>
+      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <p className="text-gray-600">{description}</p>
+    </motion.div>
   );
 };
 
