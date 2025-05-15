@@ -1,118 +1,73 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-16 pb-8">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Company Info */}
+    <footer className="bg-gray-900 text-gray-300">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid md:grid-cols-3 gap-8">
+          {/* About Section */}
           <div>
-            <h3 className="text-xl font-bold text-white mb-4">YourBrand</h3>
-            <p className="text-gray-400 mb-4">
-              Transforming businesses through innovative digital solutions.
+            <h3 className="text-xl font-bold mb-4">About Glossary Soft Tech</h3>
+            <p className="mb-4">
+              Glossary Soft Tech put emphasis on long-term commitment and combine global reach and local intimacy to provide premier professional services from consulting, system development to business IT outsourcing.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-blue-500 transition-colors">
-                <FaFacebook size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                <FaTwitter size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-blue-600 transition-colors">
-                <FaLinkedin size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-pink-500 transition-colors">
-                <FaInstagram size={20} />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-xl font-bold text-white mb-4">Quick Links</h3>
+            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-gray-400 hover:text-white transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/about" className="hover:text-white transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/services" className="hover:text-white transition-colors">
                   Services
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
+                <Link to="/careers" className="hover:text-white transition-colors">
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-white transition-colors">
                   Contact
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Services */}
-          <div>
-            <h3 className="text-xl font-bold text-white mb-4">Services</h3>
-            <ul className="space-y-2">
-              <li className="text-gray-400 hover:text-white transition-colors cursor-pointer">
-                Business Consulting
-              </li>
-              <li className="text-gray-400 hover:text-white transition-colors cursor-pointer">
-                Digital Transformation
-              </li>
-              <li className="text-gray-400 hover:text-white transition-colors cursor-pointer">
-                Software Development
-              </li>
-              <li className="text-gray-400 hover:text-white transition-colors cursor-pointer">
-                Cloud Solutions
-              </li>
-            </ul>
-          </div>
-
           {/* Contact Info */}
           <div>
-            <h3 className="text-xl font-bold text-white mb-4">Contact Info</h3>
-            <ul className="space-y-4">
-              <li className="flex items-center">
-                <FaMapMarkerAlt className="text-blue-500 mr-3" />
-                <span>123 Business Street, Tech City, TC 12345</span>
-              </li>
-              <li className="flex items-center">
-                <FaPhone className="text-blue-500 mr-3" />
-                <span>+1 (555) 123-4567</span>
-              </li>
-              <li className="flex items-center">
-                <FaEnvelope className="text-blue-500 mr-3" />
-                <span>support@yourbrand.com</span>
-              </li>
-            </ul>
+            <h3 className="text-xl font-bold mb-4">Contact Info</h3>
+            <div className="space-y-4">
+              <div className="flex items-start">
+                <FaEnvelope className="mt-1 mr-3" />
+                <a href="mailto:info@glossarysofttech.com" className="hover:text-white transition-colors">
+                  info@glossarysofttech.com
+                </a>
+              </div>
+              <div className="flex items-start">
+                <FaMapMarkerAlt className="mt-1 mr-3" />
+                <p>
+                  Glossary soft tech pvt ltd,<br />
+                  Alluri trade center, 5th floor, 406/2<br />
+                  Beside usha mullapudi arche,<br />
+                  kphb main road- 500072.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} YourBrand. All rights reserved.
-            </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
-                Privacy Policy
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
-                Terms of Service
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
-                Cookie Policy
-              </a>
-            </div>
-          </div>
+        {/* Copyright */}
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
+          <p>All rights reserved © {new Date().getFullYear()} by Glossary Softtech Pvt Ltd.</p>
         </div>
       </div>
     </footer>
